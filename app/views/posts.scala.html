@@ -1,0 +1,39 @@
+@(posts: List[model.Post])
+
+@main("Post Page") {
+    <h1 style="font-family: cursive">My Posts</h1>
+    <div class="container">
+        <div class="row" style="margin-top: 50px;">
+            <div class="col-6">
+                @if(posts.isEmpty()) {
+                    <h6 style="font-family: fantasy;
+                        border-bottom: 1px solid">There are no posts!</h6>
+                } else {
+                    <h6 style="font-family: fantasy;
+                        border-bottom: 1px solid">@posts.size() @if(posts.size()== 1){Post}else {Posts} found.</h6>
+                }
+                @for(post <- posts){
+                    <div class="bg-info text-light" style="margin: 10px;">
+                        <h3>@post.getTitle()</h3>
+                        <span>@post.getContent</span>
+                    </div>
+                }
+            </div>
+            <div class="col-6" style="border: 2px dotted">
+                <h4>Create New</h4>
+                <div class="row">
+                    <div class="col-6">
+                        <label>Title</label>
+                        <input style="width: 100%"/>
+                    </div>
+                    <div class="col-6">
+                        <label>Content</label>
+                        <input style="width: 100%"/>
+                        <button class="btn btn-primary" style="margin-top: 20px; width: 100%">Create</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+}
