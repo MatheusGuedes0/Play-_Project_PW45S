@@ -6,6 +6,22 @@
     <div class="bg-info text-light" style="margin: 10px">
         <h3>@post.getTitle()</h3>
         <span>@post.getContent</span>
+
+        <!-- Formulário para Editar -->
+        @helper.form(routes.HomeController.editPost(post.getId)) {
+            @helper.CSRF.formField
+            <button class="btn btn-primary" style="margin-top: 10px; width: 100%" type="submit">
+                Edit
+            </button>
+        }
+
+        <!-- Formulário para Deletar -->
+        @helper.form(routes.HomeController.deletePost(post.getId)) {
+            @helper.CSRF.formField
+            <button class="btn btn-danger" style="margin-top: 10px; width: 100%" type="submit">
+                Delete
+            </button>
+        }
     </div>
 }
 

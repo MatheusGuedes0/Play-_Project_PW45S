@@ -27,5 +27,14 @@ public class Post {
         return content;
     }
 
+    public void setTitle(String title2) {
+        this.title = title2;
+    }
+
+    public void setContent(String content2) {
+        this .content = content2;
+    }
+
+
 
 }

@@ -7,7 +7,9 @@ lazy val root = (project in file("."))
   .settings(
     name := """playApp""",
     libraryDependencies ++= Seq(
-      guice
+      guice,
+      "org.webjars" % "bootstrap" % "5.3.0"
+
     )
   )
 fork := true // required for "sbt run" to pick up javaOptions
