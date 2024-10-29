@@ -1,20 +1,25 @@
 package service;
 import form.PostForm;
 import model.Post;
+import model.PostRepository;
+
+import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class PostService {
+
+    private final PostRepository postRepository;
     private List<Post> posts = new ArrayList<>();
 
-    public PostService(){
-        posts.add(new Post(1,"PW45S", "Cool subject"));
-        posts.add(new Post(2,"Play!", "Cool framework"));
+    @Inject
+    public PostService(PostRepository postRepository){
+       this.postRepository = postRepository;
     }
 
     public List<Post> getPosts(){
-        return posts;
+        return postRepository.getAll();
     }
 
     public Post getPost(int postId) {
