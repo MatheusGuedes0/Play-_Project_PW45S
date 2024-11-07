@@ -44,26 +44,41 @@ public class HomeController extends Controller {
 
         if (boundForm.hasErrors()) {
             return badRequest(views.html.posts.render(postService.getPosts(), boundForm, request));
+        } else {
+            postService.add(boundForm.get());
+            return redirect(routes.HomeController.getPosts(null)); 
         }
-
-        postService.add(boundForm.get());
-        return redirect(routes.HomeController.getPosts(null)); // Passa null para redirecionar corretamente
     }
 
     public Result editPost(Integer id, Http.Request request) {
+        // Bind the form data from the request
+        Form<PostForm> boundForm = postForm.bindFromRequest(request);
+
+        if (boundForm.hasErrors()) {
+            // Render the edit page with the original post data if there are form errors
+            Post post = postService.getPost(id);
+            return ok(views.html.editPosts.render(List.of(post), boundForm, request));
+        }
+
+        // Get the updated data from the form and update the post
+        PostForm postFormData = boundForm.get();
+        boolean updated = postService.updatePost(id, postFormData);
+
+        if (!updated) {
+            // Handle case where the post with the given ID was not found
+            return notFound("Post not found");
+        }
+
+        // Redirect to the posts page after a successful update
+        return redirect(routes.HomeController.getPosts(null));
+    }
+
+    public Result deletePost(Integer id, Http.Request request) {
         Post post = postService.getPost(id);
         if (post == null) {
             return ok(views.html.posts.render(Collections.emptyList(), postForm, request));
         }
-        return ok(views.html.posts.render(List.of(post), postForm, request));
+        postService.delete(id); // Passa o ID diretamente
+        return redirect(routes.HomeController.getPosts(null));
     }
-
-    public Result deletePost(Integer id, Http.Request request) {
-    Post post = postService.getPost(id);
-    if (post == null) {
-        return ok(views.html.posts.render(Collections.emptyList(), postForm, request));
-    }
-    postService.delete(id); // Passa o ID diretamente
-    return redirect(routes.HomeController.getPosts(null));
-}
 }

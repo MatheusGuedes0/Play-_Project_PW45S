@@ -3,9 +3,11 @@
 # ~~~~
 
 # An example controller showing a sample home page
-GET     /                           controllers.HomeController.index()
-
+GET     /                           controllers.HomeController.getPosts(postId: Integer?=null, request: Request)
+                                    
+    
 GET /posts                          controllers.HomeController.getPosts(postId: Integer?=null, request: Request )
+
 
 POST /post                          controllers.HomeController.createPost(request: Request)
 # Map static resources from the /public folder to the /assets URL path

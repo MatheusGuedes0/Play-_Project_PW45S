@@ -5,6 +5,7 @@ import play.data.validation.Constraints;
 import javax.validation.Constraint;
 
 public class PostForm {
+    private int id;
     @Constraints.Required
 
     private String title;
@@ -13,6 +14,14 @@ public class PostForm {
     @Constraints.MaxLength(200)
     private String content;
 
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getTitle() {
         return title;
