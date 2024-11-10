@@ -3,14 +3,18 @@
 @(posts: List[model.Post], postForm: Form[PostForm])(implicit request: Request)
 
 @displayPost(post: model.Post) = {
-<div class="bg-info text-light" style="margin: 10px">
-    <h3>@post.getTitle()</h3>
-    <span>@post.getContent</span>
-
+<div class="text-light border border-warning rounded" style="margin: 10px">
+    <div >
+        <div class="text-center mb-3">
+            <h3 class="text-dark">@post.getTitle()</h3>
+        </div>
+        
+        <span class="text-dark">@post.getContent</span>
+    </div>
     <!-- Formulário para Editar -->
     @helper.form(routes.HomeController.editPost(post.getId)) {
     @helper.CSRF.formField
-    <button class="btn btn-primary" style="margin-top: 10px; width: 100%" type="submit">
+    <button class="btn btn-dark " style="margin-top: 10px; width: 100%" type="submit">
         Edit
     </button>
     }
@@ -18,9 +22,10 @@
     <!-- Formulário para Deletar -->
     @helper.form(routes.HomeController.deletePost(post.getId)) {
     @helper.CSRF.formField
-    <button class="btn btn-danger" style="margin-top: 10px; width: 100%" type="submit">
+    <button class="btn btn-dark " style="margin-top: 10px; width: 100%" type="submit">
         Delete
     </button>
+    
     }
 </div>
 }
@@ -30,7 +35,7 @@
     <h1 class="font-family: cursive text-center">UTFPR Newsletter</h1>
 </div>
 <div class="container">
-    <div class="row " >
+    <div class="row ">
         <div class="col-6 border border-warning">
             @if(posts.isEmpty()) {
             <h6 style="font-family: fantasy
@@ -55,7 +60,7 @@
                         <div class="col-6">
                             <label>Content</label>
                             <input name="content" style="width: 100%" />
-                            <button class="btn btn-primary" style="margin-top: 20px
+                            <button class="btn btn-dark " style="margin-top: 20px
                                 width: 100%" type="submit">Create</button>
                         </div>
                     </div>
